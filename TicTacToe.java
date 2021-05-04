@@ -34,7 +34,7 @@ public class TicTacToe
         }
     }
     
-    static void printBoard(String[][] lineUpDown, String[] lineCross, String[][] gridWhole, String[][] coordinates)
+    static void printBoard(String[][] lineUpDown, String[] lineCross, String[][] gridWhole, String[][] coordinates, int p, String[][] symbolSpaces)
     {
         //for (int j = 1; j < 6; j++)
         //{
@@ -52,7 +52,21 @@ public class TicTacToe
             {
                 for (int b = 0; b < 19; b++)
                 {
-                    System.out.print(lineUpDown[a][b]);
+                    if (a == 2)
+                    {
+                        if (a==2)
+                        {
+                            p = 0;
+                        }
+                        for (int l = 0; l < 11; l++) 
+                        {
+                            System.out.print(symbolSpaces[p][l]);
+                        }
+                    }
+                    else 
+                    {
+                        System.out.print(lineUpDown[a][b]);
+                    }
                 }
                 System.out.println(" ");
             }
@@ -71,9 +85,48 @@ public class TicTacToe
         
     }
     
-    static void gridSpace()
+    static void gridSpace(String userSpace, int idk)
     {
-        
+        if (userSpace.equals("A1") || userSpace.equals("a1"))
+        {
+            
+        }
+        else if (userSpace.equals("A2") || userSpace.equals("a2"))
+        {
+            
+        }
+        else if (userSpace.equals("A3") || userSpace.equals("a3"))
+        {
+            
+        }
+        else if (userSpace.equals("B1") || userSpace.equals("b1"))
+        {
+            
+        }
+        else if (userSpace.equals("B2") || userSpace.equals("b2"))
+        {
+            
+        }
+        else if (userSpace.equals("B3") || userSpace.equals("b3"))
+        {
+            
+        }
+        else if (userSpace.equals("C1") || userSpace.equals("c1"))
+        {
+            
+        }
+        else if (userSpace.equals("C2") || userSpace.equals("c2"))
+        {
+            
+        }
+        else if (userSpace.equals("C3") || userSpace.equals("c3"))
+        {
+            
+        }
+        else
+        {
+            idk = 1;
+        }
     }
     
     static void userGuess()
@@ -89,6 +142,7 @@ public class TicTacToe
         String[][] coordinates = {{"A", "B", "C"},{"1", "2", "3"}};
         String[][] lineUpDown = {{" ", " ", " ", " ", " "," ", " ", "|", " ", " ", " "," ", " ", " ", " ", "|", " ", " ", " "," ", " ", " ", " "},{" ", " ", " ", " "," ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " "},{" ", " ", " "," ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|"," ", " ", " ", " ", " ", " ", " "}};
         //insert x/o [2][4/13/20]
+        String[][] symbolSpaces = {{"   ", "@", "   ", "|", "   ","@", "   ", "|", "   ","@", "   "},{" ", " ", " ", " "," ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " "},{" ", " ", " "," ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|"," ", " ", " ", " ", " ", " ", " "}};
         String[] lineCross = {"-------|-------|-------"};
         String[][] gridWhole = {{" ", " ", " "},{""}};
         
@@ -96,6 +150,10 @@ public class TicTacToe
             String ynAnswer = " ";
             boolean tOrF = false;
             String ready;
+            int p = 0;
+            String userSpace;
+            String programSpace;
+            int idk = 0;
             
             //intro
             clear();
@@ -125,8 +183,15 @@ public class TicTacToe
             
             System.out.println("Type anything when you are redy to continue.");
             ready = input.next();
+            clear();
             
-            printBoard(lineUpDown, lineCross, gridWhole, coordinates);
+            printBoard(lineUpDown, lineCross, gridWhole, coordinates, p, symbolSpaces);
+            
+            System.out.println("What space would you like to occupy?");
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.print("Vertical Coordinate (letter A, B, C): ");
+            userSpace = input.next();
             
             System.out.println("Would you like to play again? (Type \"yes\" or \"no\")");
             ynAnswer = input.next();

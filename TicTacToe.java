@@ -1,5 +1,3 @@
-
-
 /**
  * Play a game of tic tac toe with the program.
  *
@@ -34,34 +32,37 @@ public class TicTacToe
         }
     }
     
-    static void printBoard(String[][] lineUpDown, String[] lineCross, String[][] gridWhole, String[][] coordinates, int p, String[][] symbolSpaces)
+    static void exampleBoard(String[][] lineUpDown, String[] lineCross, String[][] coordinates,  String[][] symbolSpaces)
     {
-        //for (int j = 1; j < 6; j++)
-        //{
-            //gridWhole[0][j] = coordinates[1][j];
-        //}
-        
-        //for (int s = 1; s < 5; s++)
-        //{
-            //gridWhole[s][0] = coordinates[0][s];
-        //}
-        
         for (int x = 0; x < 3; x++)
         {
             for (int a = 0; a < 3; a++)
             {
-                for (int b = 0; b < 19; b++)
+                for (int b = 0; b < 5; b++)
                 {
-                    if (a == 2)
+                    if (x == 0 && a==1)
                     {
-                        if (a==2)
-                        {
-                            p = 0;
-                        }
                         for (int l = 0; l < 11; l++) 
                         {
-                            System.out.print(symbolSpaces[p][l]);
+                            System.out.print(symbolSpaces[0][l]);
                         }
+                        break;
+                    }
+                    else if (x == 1 && a==1)
+                    {
+                        for (int l = 0; l < 11; l++) 
+                        {
+                            System.out.print(symbolSpaces[1][l]);
+                        }
+                        break;
+                    }
+                    else if (x == 2 && a==1)
+                    {
+                        for (int l = 0; l < 11; l++) 
+                        {
+                            System.out.print(symbolSpaces[2][l]);
+                        }
+                        break;
                     }
                     else 
                     {
@@ -80,48 +81,118 @@ public class TicTacToe
         }
     }
     
+    static void printBoard(String[][] lineUpDown, String[] lineCross, String[][] coordinates, String[][] exampleCords)
+    {
+        for (int x = 0; x < 3; x++)
+        {
+            for (int a = 0; a < 3; a++)
+            {
+                for (int b = 0; b < 5; b++)
+                {
+                    if (x == 0 && a==1)
+                    {
+                        for (int l = 0; l < 11; l++) 
+                        {
+                            System.out.print(exampleCords[0][l]);
+                        }
+                        break;
+                    }
+                    else if (x == 1 && a==1)
+                    {
+                        for (int l = 0; l < 11; l++) 
+                        {
+                            System.out.print(exampleCords[1][l]);
+                        }
+                        break;
+                    }
+                    else if (x == 2 && a==1)
+                    {
+                        for (int l = 0; l < 11; l++) 
+                        {
+                            System.out.print(exampleCords[2][l]);
+                        }
+                        break;
+                    }
+                    else 
+                    {
+                        System.out.print(lineUpDown[a][b]);
+                    }
+                }
+                System.out.println(" ");
+            }
+            
+            if (x==2)
+            {
+                break;
+            }
+            
+            System.out.println(lineCross[0]);
+        }
+    }
+    
+    static void printExample(int displayExample, String[][] lineUpDown, String[] lineCross, String[][] coordinates, String[][]exampleCords)
+    {
+        if (displayExample==1)
+            {
+                exampleBoard(lineUpDown, lineCross, coordinates, exampleCords);
+                System.out.println(" ");
+                System.out.println("----------------------------------------------------------------|");
+                System.out.println(" ");
+            }
+    }
+    
+    
     static void detectWin()
     {
         
     }
     
-    static void gridSpace(String userSpace, int idk)
+    static void gridSpace(String userSpace, int idk, String[][] symbolSpaces, String userSymbol)
     {
         if (userSpace.equals("A1") || userSpace.equals("a1"))
         {
-            
+            //symbolSpaces[0][1]
+            symbolSpaces[0][1] = userSymbol;
         }
         else if (userSpace.equals("A2") || userSpace.equals("a2"))
         {
-            
+            //symbolSpaces[0][5]
+            symbolSpaces[0][5] = userSymbol;
         }
         else if (userSpace.equals("A3") || userSpace.equals("a3"))
         {
-            
+            //symbolSpaces[0][9]
+            symbolSpaces[0][9] = userSymbol;
         }
         else if (userSpace.equals("B1") || userSpace.equals("b1"))
         {
-            
+            //symbolSpaces[1][1]
+            symbolSpaces[1][1] = userSymbol;
         }
         else if (userSpace.equals("B2") || userSpace.equals("b2"))
         {
-            
+            //symbolSpaces[1][5]
+            symbolSpaces[1][5] = userSymbol;
         }
         else if (userSpace.equals("B3") || userSpace.equals("b3"))
         {
-            
+            //symbolSpaces[1][9]
+            symbolSpaces[1][9] = userSymbol;
         }
         else if (userSpace.equals("C1") || userSpace.equals("c1"))
         {
-            
+            //symbolSpaces[2][1]
+            symbolSpaces[2][1] = userSymbol;
         }
         else if (userSpace.equals("C2") || userSpace.equals("c2"))
         {
-            
+            //symbolSpaces[2][5]
+            symbolSpaces[2][5] = userSymbol;
         }
         else if (userSpace.equals("C3") || userSpace.equals("c3"))
         {
-            
+            //symbolSpaces[2][9]
+            symbolSpaces[2][9] = userSymbol;
         }
         else
         {
@@ -129,9 +200,11 @@ public class TicTacToe
         }
     }
     
-    static void userGuess()
+    static void printBoards(int displayExample, String[][] lineUpDown, String[] lineCross, String[][] coordinates, String[][]exampleCords, String[][] symbolSpaces)
     {
-        
+        printExample(displayExample, lineUpDown, lineCross, coordinates, exampleCords);
+     
+        printBoard(lineUpDown, lineCross, coordinates, symbolSpaces);
     }
     
     public static void main(String[] args)
@@ -139,14 +212,17 @@ public class TicTacToe
         boolean play = false;
         Scanner input = new Scanner(System.in);
         
-        String[][] coordinates = {{"A", "B", "C"},{"1", "2", "3"}};
-        String[][] lineUpDown = {{" ", " ", " ", " ", " "," ", " ", "|", " ", " ", " "," ", " ", " ", " ", "|", " ", " ", " "," ", " ", " ", " "},{" ", " ", " ", " "," ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " "},{" ", " ", " "," ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|"," ", " ", " ", " ", " ", " ", " "}};
-        //insert x/o [2][4/13/20]
-        String[][] symbolSpaces = {{"   ", "@", "   ", "|", "   ","@", "   ", "|", "   ","@", "   "},{" ", " ", " ", " "," ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " "},{" ", " ", " "," ", " ", " ", " ", "|", " "," ", " ", " ", " ", " ", " ", "|"," ", " ", " ", " ", " ", " ", " "}};
-        String[] lineCross = {"-------|-------|-------"};
-        String[][] gridWhole = {{" ", " ", " "},{""}};
+        
         
         do{
+            String[][] coordinates = {{"A", "B", "C"},{"1", "2", "3"}};
+            String[][] lineUpDown = {{"       ", "|", "       ", "|", "       "},{"       ", "|", "       ", "|", "       "},{"       ", "|", "       ", "|","       "}};
+            //insert x/o [2][4/13/20]
+            String[][] symbolSpaces = {{"   ", "@", "   ", "|", "   ","@", "   ", "|", "   ","@", "   "},{"   ", "@", "   ", "|", "   ","@", "   ", "|", "   ","@", "   "},{"   ", "@", "   ", "|", "   ","@", "   ", "|", "   ","@", "   "}};
+            String[][] exampleCords = {{"  ", "A1", "   ", "|", "  ","A2", "   ", "|", "   ","A3", "  "},{"  ", "B1", "   ", "|", "  ","B2", "   ", "|", "   ","B3", "   "},{"  ", "C1", "   ", "|", "  ","C2", "   ", "|", "   ","C3", "   "}};
+            String[] lineCross = {"-------|-------|-------"};
+            int displayExample = 0;
+            
             String ynAnswer = " ";
             boolean tOrF = false;
             String ready;
@@ -154,6 +230,8 @@ public class TicTacToe
             String userSpace;
             String programSpace;
             int idk = 0;
+            int symbolInt = 0;
+            String userSymbol;
             
             //intro
             clear();
@@ -181,17 +259,55 @@ public class TicTacToe
             
             tutorial(tOrF);
             
-            System.out.println("Type anything when you are redy to continue.");
+            System.out.println("Type anything when you are ready to continue.");
             ready = input.next();
             clear();
             
-            printBoard(lineUpDown, lineCross, gridWhole, coordinates, p, symbolSpaces);
+            do {
+                System.out.println("Would you like to be X's (type \"1\") or O's (type \"2\")?");
+                symbolInt = input.nextInt();
+                if (symbolInt==1)
+                {
+                    userSymbol = "X";
+                }
+                else if (symbolInt==2)
+                {
+                    userSymbol = "O";
+                }
+                else
+                {
+                    System.out.println("Input not recogized; please re-enter");
+                    System.out.println(" ");
+                    userSymbol = "?";
+                }
+            } while (userSymbol.equals("?"));
             
-            System.out.println("What space would you like to occupy?");
+            clear();
+            
+            exampleBoard(lineUpDown, lineCross, coordinates, exampleCords);
             System.out.println(" ");
             System.out.println(" ");
-            System.out.print("Vertical Coordinate (letter A, B, C): ");
-            userSpace = input.next();
+            System.out.println("Here is a guide to the board's coordinates.");
+            System.out.println("Would you like to keep this guide throughout the program? (Type \"1\" for yes; \"2\" for no)");
+            displayExample = input.nextInt();
+            clear();
+            
+            printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
+            ///////////////////
+            //do {
+                System.out.println("What space would you like to occupy?");
+                System.out.println(" ");
+                System.out.println(" ");
+                System.out.print("Coordinate (ex: A1, B2, etc.): ");
+                userSpace = input.next();
+                    
+                gridSpace(userSpace, idk, symbolSpaces, userSymbol);
+                    
+                clear();
+                
+                printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
+            //} while
+            //////////////////////////
             
             System.out.println("Would you like to play again? (Type \"yes\" or \"no\")");
             ynAnswer = input.next();

@@ -207,6 +207,133 @@ public class TicTacToe
         printBoard(lineUpDown, lineCross, coordinates, symbolSpaces);
     }
     
+    static void programResponse(String[][] symbolSpaces, String programSymbol, String userSymbol)
+    {
+        //horizontal responses
+        //a1 = a2; respond a3
+        if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[0][5].equals(userSymbol))
+        {
+            symbolSpaces[0][9] = programSymbol;
+        }
+        //a2 = a3; respond a1
+        else if (symbolSpaces[0][5].equals(userSymbol) && symbolSpaces[0][9].equals(userSymbol))
+        {
+            symbolSpaces[0][1] = programSymbol;
+        }
+        //a1 = a3; respond a2
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[0][9].equals(userSymbol))
+        {
+            symbolSpaces[0][5] = programSymbol;
+        }
+        //b1 = b2; respond b3
+        else if (symbolSpaces[1][1].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol))
+        {
+            symbolSpaces[1][9] = programSymbol;
+        }
+        //b2 = b3; respond b1
+        else if (symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[1][9].equals(userSymbol))
+        {
+            symbolSpaces[1][1] = programSymbol;
+        }
+        //b1 = b3; respond b2
+        else if (symbolSpaces[1][1].equals(userSymbol) && symbolSpaces[1][9].equals(userSymbol))
+        {
+            symbolSpaces[1][5] = programSymbol;
+        }
+        //c1 = c2; respond c3
+        else if (symbolSpaces[2][1].equals(userSymbol) && symbolSpaces[2][5].equals(userSymbol))
+        {
+            symbolSpaces[2][9] = programSymbol;
+        }
+        //c2 = c3; respond c1
+        else if (symbolSpaces[2][5].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            symbolSpaces[2][1] = programSymbol;
+        }
+        //c1 = c3; respond c2
+        else if (symbolSpaces[2][1].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            symbolSpaces[2][5] = programSymbol;
+        }
+        //vertical//
+        //a1 = b1; respond c1
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[1][1].equals(userSymbol))
+        {
+            symbolSpaces[2][1] = programSymbol;
+        }
+        //b1 = c1; respond a1
+        else if (symbolSpaces[1][1].equals(userSymbol) && symbolSpaces[2][1].equals(userSymbol))
+        {
+            symbolSpaces[0][1] = programSymbol;
+        }
+        //a1 = c1; respond b1
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[2][1].equals(userSymbol))
+        {
+            symbolSpaces[1][1] = programSymbol;
+        }
+        //a2 = b2; respond c2
+        else if (symbolSpaces[0][5].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol))
+        {
+            symbolSpaces[2][5] = programSymbol;
+        }
+        //b2 = c2; respond a2
+        else if (symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[2][5].equals(userSymbol))
+        {
+            symbolSpaces[0][5] = programSymbol;
+        }
+        //a2 = c2; respond b2
+        else if (symbolSpaces[0][5].equals(userSymbol) && symbolSpaces[2][5].equals(userSymbol))
+        {
+            symbolSpaces[1][5] = programSymbol;
+        }
+        //a3 = b3; respond c3
+        else if (symbolSpaces[0][9].equals(userSymbol) && symbolSpaces[1][9].equals(userSymbol))
+        {
+            symbolSpaces[2][9] = programSymbol;
+        }
+        //b3 = c3; respond a3
+        else if (symbolSpaces[1][9].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            symbolSpaces[0][9] = programSymbol;
+        }
+        //a3 = c3; respond b3
+        else if (symbolSpaces[0][9].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            symbolSpaces[1][9] = programSymbol;
+        }
+        //diagonal//
+        //a1 = b2; respond c3
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol))
+        {
+            symbolSpaces[2][9] = programSymbol;
+        }
+        //b2 = c3; respond a1
+        else if (symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            symbolSpaces[0][1] = programSymbol;
+        }
+        //a1 = c3; respond b2
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            symbolSpaces[1][5] = programSymbol;
+        }
+        //a3 = b2; respond c1
+        else if (symbolSpaces[0][9].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol))
+        {
+            symbolSpaces[2][1] = programSymbol;
+        }
+        //b2 = c1; respond a3
+        else if (symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[2][1].equals(userSymbol))
+        {
+            symbolSpaces[0][9] = programSymbol;
+        }
+        //a3 = c1; respond b2
+        else if (symbolSpaces[0][9].equals(userSymbol) && symbolSpaces[2][1].equals(userSymbol))
+        {
+            symbolSpaces[1][5] = programSymbol;
+        }
+    }
+    
     public static void main(String[] args)
     {
         boolean play = false;
@@ -231,7 +358,9 @@ public class TicTacToe
             String programSpace;
             int idk = 0;
             int symbolInt = 0;
-            String userSymbol;
+            String userSymbol = " ";
+            String programSymbol = " ";
+            boolean recognized = true;
             
             //intro
             clear();
@@ -278,9 +407,18 @@ public class TicTacToe
                 {
                     System.out.println("Input not recogized; please re-enter");
                     System.out.println(" ");
-                    userSymbol = "?";
+                    recognized = false;
                 }
-            } while (userSymbol.equals("?"));
+            } while (!recognized);
+            
+            if (userSymbol.equals("X"))
+            {
+                programSymbol = "O";
+            }
+            else if (userSymbol.equals("O"))
+            {
+                programSymbol = "X";
+            }
             
             clear();
             
@@ -306,26 +444,40 @@ public class TicTacToe
                 clear();
                 
                 printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
-            //} while
+                
+                System.out.println(" ");
+                System.out.println(" ");
+                System.out.println("Type anything to continue.");
+                
+                programResponse(symbolSpaces, programSymbol, userSymbol);
+                
+                clear();
+            //} while (!win);
             //////////////////////////
             
-            System.out.println("Would you like to play again? (Type \"yes\" or \"no\")");
-            ynAnswer = input.next();
-            if (ynAnswer.equals("yes") || ynAnswer.equals("Yes") || ynAnswer.equals("YES") || ynAnswer.equals("Y") || ynAnswer.equals("y"))
-            {
-                play = true;
-            }
-            else if (ynAnswer.equals("no") || ynAnswer.equals("No") || ynAnswer.equals("NO") || ynAnswer.equals("N") || ynAnswer.equals("n"))
-            {
-                play = false;
-            }
-            else
-            {
-                play = false;
-                System.out.println(" ");
-                System.out.println(" ");
-                System.out.println("Input not recogized; ending program");
-            }
+            //DELETE LATER
+            printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
+            //DELETE LATER
+            
+            do {
+                System.out.println("Would you like to play again? (Type \"yes\" or \"no\")");
+                ynAnswer = input.next();
+                if (ynAnswer.equals("yes") || ynAnswer.equals("Yes") || ynAnswer.equals("YES") || ynAnswer.equals("Y") || ynAnswer.equals("y"))
+                {
+                    play = true;
+                }
+                else if (ynAnswer.equals("no") || ynAnswer.equals("No") || ynAnswer.equals("NO") || ynAnswer.equals("N") || ynAnswer.equals("n"))
+                {
+                    play = false;
+                }
+                else
+                {
+                    recognized = false;
+                    System.out.println(" ");
+                    System.out.println(" ");
+                    System.out.println("Input not recogized; ending program");
+                }
+            } while (!recognized);
         } while (play);
     }
 }

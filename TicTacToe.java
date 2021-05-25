@@ -142,9 +142,79 @@ public class TicTacToe
     }
     
     
-    static void detectWin()
+    static void detectWinLose(String[][] symbolSpaces, String userSymbol, String programSymbol,  int yes)
     {
-        
+        //user win
+        //horizontal
+        if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[0][5].equals(userSymbol) && symbolSpaces[0][9].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        else if (symbolSpaces[1][1].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[1][9].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        else if (symbolSpaces[2][1].equals(userSymbol) && symbolSpaces[2][5].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        //vertical
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[1][1].equals(userSymbol) && symbolSpaces[2][1].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        else if (symbolSpaces[0][5].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[2][5].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        else if (symbolSpaces[0][9].equals(userSymbol) && symbolSpaces[1][9].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        //diagonal
+        else if (symbolSpaces[0][1].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[2][9].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        else if (symbolSpaces[0][9].equals(userSymbol) && symbolSpaces[1][5].equals(userSymbol) && symbolSpaces[2][1].equals(userSymbol))
+        {
+            yes = 5;
+        }
+        //program win
+        if (symbolSpaces[0][1].equals(programSymbol) && symbolSpaces[0][5].equals(programSymbol) && symbolSpaces[0][9].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        else if (symbolSpaces[1][1].equals(programSymbol) && symbolSpaces[1][5].equals(programSymbol) && symbolSpaces[1][9].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        else if (symbolSpaces[2][1].equals(programSymbol) && symbolSpaces[2][5].equals(programSymbol) && symbolSpaces[2][9].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        //vertical
+        else if (symbolSpaces[0][1].equals(programSymbol) && symbolSpaces[1][1].equals(programSymbol) && symbolSpaces[2][1].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        else if (symbolSpaces[0][5].equals(programSymbol) && symbolSpaces[1][5].equals(programSymbol) && symbolSpaces[2][5].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        else if (symbolSpaces[0][9].equals(programSymbol) && symbolSpaces[1][9].equals(programSymbol) && symbolSpaces[2][9].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        //diagonal
+        else if (symbolSpaces[0][1].equals(programSymbol) && symbolSpaces[1][5].equals(programSymbol) && symbolSpaces[2][9].equals(programSymbol))
+        {
+            yes = 10;
+        }
+        else if (symbolSpaces[0][9].equals(programSymbol) && symbolSpaces[1][5].equals(programSymbol) && symbolSpaces[2][1].equals(programSymbol))
+        {
+            yes = 10;
+        }
     }
     
     static void gridSpace(String userSpace, int idk, String[][] symbolSpaces, String userSymbol)
@@ -207,7 +277,7 @@ public class TicTacToe
         printBoard(lineUpDown, lineCross, coordinates, symbolSpaces);
     }
     
-    static void programResponse(String[][] symbolSpaces, String programSymbol, String userSymbol)
+    static void programResponse(String[][] symbolSpaces, String programSymbol, String userSymbol, int unusualUp, int unusualSide)
     {
         //horizontal responses
         //a1 = a2; respond a3
@@ -332,6 +402,18 @@ public class TicTacToe
         {
             symbolSpaces[1][5] = programSymbol;
         }
+        
+        //OTHER USER COMBINATIONS
+        
+        else
+        {
+            do
+            {
+                unusualSide = (int)(Math.random()*((2-0)+1))+0;
+                unusualUp = (int)(Math.random()*((2-0)+1))+0;
+            } while (symbolSpaces[unusualSide][unusualUp].equals(programSymbol) || symbolSpaces[unusualSide][unusualUp].equals(userSymbol));
+            symbolSpaces[unusualSide][unusualUp] = programSymbol;
+        }
     }
     
     public static void main(String[] args)
@@ -350,6 +432,9 @@ public class TicTacToe
             String[] lineCross = {"-------|-------|-------"};
             int displayExample = 0;
             
+            int unusualUp = 0;
+            int unusualSide = 0;
+            
             String ynAnswer = " ";
             boolean tOrF = false;
             String ready;
@@ -361,6 +446,8 @@ public class TicTacToe
             String userSymbol = " ";
             String programSymbol = " ";
             boolean recognized = true;
+            boolean win = false;
+            int yes = 0;
             
             //intro
             clear();
@@ -430,15 +517,16 @@ public class TicTacToe
             displayExample = input.nextInt();
             clear();
             
-            printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
+            
             ///////////////////
-            //do {
+            do {
+                printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
                 System.out.println("What space would you like to occupy?");
                 System.out.println(" ");
                 System.out.println(" ");
                 System.out.print("Coordinate (ex: A1, B2, etc.): ");
                 userSpace = input.next();
-                    
+                
                 gridSpace(userSpace, idk, symbolSpaces, userSymbol);
                     
                 clear();
@@ -449,15 +537,18 @@ public class TicTacToe
                 System.out.println(" ");
                 System.out.println("Type anything to continue.");
                 
-                programResponse(symbolSpaces, programSymbol, userSymbol);
+                if (yes==5 || yes==10)
+                {
+                    win = true;
+                }
+                
+                programResponse(symbolSpaces, programSymbol, userSymbol, unusualUp, unusualSide);
                 
                 clear();
-            //} while (!win);
+            } while (!win);
             //////////////////////////
             
-            //DELETE LATER
-            printBoards(displayExample, lineUpDown, lineCross, coordinates,exampleCords, symbolSpaces);
-            //DELETE LATER
+            
             
             do {
                 System.out.println("Would you like to play again? (Type \"yes\" or \"no\")");
